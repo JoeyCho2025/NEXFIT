@@ -1,0 +1,17 @@
+
+
+
+
+
+// ✅ 引入 Bootstrap 的原始 SCSS
+@import "bootstrap/scss/bootstrap";
+
+// ✅ 你自己的客製樣式（放在 import 後）
+.nav-link {
+  color: $link-color;
+  text-decoration: none;
+
+  &:hover {
+    color: #333333;
+  }
+}
