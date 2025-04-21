@@ -1,30 +1,65 @@
 "use client";
 
-import React from "react";
+import { useRouter } from "next/router";
+import Link from "next/link";
+import React, { useEffect } from "react";
 import "@/styles/sidebar.css";
 
 export default function Sidebar() {
   return (
-    <div className="flex">
-      <div className="ml-20 mt-10 rtl w-1/4">
-        <ul className=" border rounded-t-xl mb-10">
-          <li className="text-4xl text-white bg-black text-center p-3 rounded-t-lg">
+    <div className="flex w-1/5">
+      <div className="ml-10 mt-10 w-full">
+        <ul className=" border border-borderColor rounded-xl mb-10 ">
+          <li className="text-lg text-white w-full bg-black text-center p-3 rounded-t-lg">
             會員中心
           </li>
-          <li className="text-2xl border-b p-2">帳戶基本資料</li>
-          <li className="text-2xl border-b p-2">身體基本資料</li>
-          <li className="text-2xl border-b p-2">第三方綁定與密碼</li>
-          <li className="text-2xl border-b p-2">課程進度</li>
-          <li className="text-2xl border-b p-2">成就</li>
-          <li className="text-2xl p-2 ">預設收件地址、門市</li>
+          <Link href="account">
+            <li className="text-base border-b py-3.5 px-5 border-borderColor">
+              帳戶基本資料
+            </li>
+          </Link>
+          <Link href="body">
+            <li className="text-base border-b py-3.5 px-5 border-borderColor">
+              身體基本資料
+            </li>
+          </Link>
+          <Link href="password">
+            <li
+              className="text-base border-b py-3.5 px-5 border-borderColor"
+              id="account"
+            >
+              第三方綁定與密碼
+            </li>
+          </Link>
+          <Link href="session">
+            <li className="text-base border-b py-3.5 px-5 border-borderColor">
+              課程進度
+            </li>
+          </Link>
+          <Link href="achievement">
+            <li className="text-base border-b py-3.5 px-5 border-borderColor">成就</li>
+          </Link>
+          <Link href="receive">
+            <li className="text-base py-3.5 px-5 border-borderColor">
+              預設收件地址、門市
+            </li>
+          </Link>
         </ul>
-        <ul className="border rounded-t-xl">
-          <li className="text-4xl text-white bg-black text-center p-3 rounded-t-lg">
+        <ul className="border rounded-xl border-borderColor">
+          <li className="text-lg text-white bg-black text-center p-3 rounded-t-lg">
             商城
           </li>
-          <li className="text-2xl border-b p-2">訂單</li>
-          <li className="text-2xl border-b p-2">優惠券</li>
-          <li className="text-2xl  p-2">收藏清單</li>
+          <Link href="order">
+            <li className="text-base border-b py-3.5 px-5 border-borderColor">訂單</li>
+          </Link>
+          <Link href="coupon">
+            <li className="text-base border-b py-3.5 px-5 border-borderColor">
+              優惠券
+            </li>
+          </Link>
+          <Link href="favorite">
+            <li className="text-base py-3.5 px-5 border-borderColor">收藏清單</li>
+          </Link>
         </ul>
       </div>
     </div>

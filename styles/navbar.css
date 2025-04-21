@@ -22,14 +22,18 @@
   gap: 0.25rem;
 }
 
-.nav .Link {
+.Link::after {
+  display: inline-block;
+  content: attr(data-en);
   margin-left: 20px;
   color: #333333;
 }
 
-.nav .Link:hover {
-  color: #404999;
+.Link:hover::after {
+  display: inline-block;
+  content: attr(data-zh);
   text-decoration: underline;
+  text-decoration-color: #a9ba5c;
 }
 
 .nav .imageGroup {

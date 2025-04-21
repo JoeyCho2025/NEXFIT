@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
-.borderColor {
-  border-color: #e1e1e1;
+@theme {
+  --color-borderColor: #e1e1e1;
+}
+
+.active {
+ background-color: blanchedalmond
 }
