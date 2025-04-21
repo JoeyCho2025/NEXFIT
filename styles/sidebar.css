@@ -1,0 +1,5 @@
+@import "tailwindcss";
+
+.borderColor {
+  border-color: #e1e1e1;
+}
