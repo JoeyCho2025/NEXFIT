@@ -1,18 +1,6 @@
-## npm i -> 把 node_modules 下載下來
 
----
-
-## tailwinds 安裝
-
-`1.npm install tailwindcss @tailwindcss/postcss postcss`
-
-`2.export default { plugins: { "@tailwindcss/postcss": {},}}`
-
----
-
-## 基於 tailwind 開發的套件(有需要的話，可以用)
-
-[https://ui.shadcn.com/docs/components/]
+## 一個UI的元件庫，可以參考看看(bootstrap pro max)
+https://ui.shadcn.com/docs/components/
 
 ---
 
