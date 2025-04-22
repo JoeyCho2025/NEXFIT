@@ -22,18 +22,37 @@
   gap: 0.25rem;
 }
 
-.Link::after {
+.Link {
+  position: relative;
   display: inline-block;
-  content: attr(data-en);
-  margin-left: 20px;
   color: #333333;
+  text-decoration: none;
+  margin-left: 30px;
+}
+
+.linkText {
+  opacity: 0.7; 
+  transition: opacity 0.3s ease; 
+}
+
+.Link:hover .linkText {
+  opacity: 1; 
+}
+
+.Link::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0%; 
+  height: 2px;
+  background-color: #a9ba5c;
+  transition: width 0.3s ease, left 0.3s ease;
 }
 
 .Link:hover::after {
-  display: inline-block;
-  content: attr(data-zh);
-  text-decoration: underline;
-  text-decoration-color: #a9ba5c;
+  width: 100%; /* hover 時，底線寬度變為 100% */
+  left: 0; /* 底線從左側開始延伸 */
 }
 
 .nav .imageGroup {
