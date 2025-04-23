@@ -2,13 +2,15 @@
 ## 一個UI的元件庫，可以參考看看(bootstrap pro max)
 https://ui.shadcn.com/docs/components/
 
----
+----
 
 ## 待討論
 
-1.內容外框線的大小是否要固定？
-2.active的顏色要改嗎？目前是跟邊框同色(#e1e1e1)
----
+1.內容外框線的大小是否要固定？  
+2.active的顏色要改嗎？目前是跟邊框同色(#e1e1e1)  
+3.footer的背景圖要不要換一張(有點糊)或直接改成顏色之類的  
+
+----
 
 
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).

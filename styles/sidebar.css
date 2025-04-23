@@ -2,6 +2,7 @@
 
 @theme {
   --color-borderColor: #e1e1e1;
+  --color-fontColor:#474747
 }
 
 .active {

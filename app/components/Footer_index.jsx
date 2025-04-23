@@ -3,6 +3,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import "@/styles/footer.css";
 
 const socialLinks = [
   {
@@ -91,15 +92,23 @@ const sections = [
 
 export default function Footer() {
   return (
-    <footer className="w-full bg-[url(/bg2.png)] flex flex-col justify-end mt-80 h-full">
-      <div className="pt-20 pl-20 h-full">
-        <div className="ml-10 bg-white rounded-tl-[60px] p-5 h-full">
-          <div className="flex-row px-20">
-            <div className="my-6 flex justify-between ">
-              <p className="text-5xl font-bold">NEXFIT</p>
-              <div className="flex mb-10 ">
+    <footer className="mt-20 w-full h-180 absolute bg-[url(/bgimg.jpg)]">
+      <div className="pt-10 h-full">
+        <div className="ml-10 bg-white h-full rounded-2xl p-10">
+          <div className="flex-row pr-10">
+            <div className="mb-10">
+              <div className="bg-borderColor p-10 rounded-2xl">
+                <p className="text-4xl mb-5 ml-20 ">Keep in touch</p>
+                <p className="ml-20">
+                  保持聯繫，也保持狀態，關於課程、補給或健身的事，都可以來找我們聊聊。
+                </p>
+              </div>
+            </div>
+            <div className="mb-10 flex justify-between ">
+              <p className="text-5xl">NEXFIT</p>
+              <div className="flex">
                 {socialLinks.map((sL, index) => (
-                  <Link href={sL.href} key={sL.id} className="ml-10 pr-1">
+                  <Link href={sL.href} key={sL.id} className="ml-5">
                     <Image
                       src={sL.icon}
                       alt="Account Icon"
@@ -111,14 +120,14 @@ export default function Footer() {
                 ))}
               </div>
             </div>
-            <div className="flex justify-between">
+            <div className="mb-10 flex justify-between">
               {sections.map((section) => (
                 <div key={section.id} className="flex flex-col pr-15">
-                  <div className="mb-6">
-                    <p className="text-4xl font-semibold">{section.title}</p>
+                  <div>
+                    <p className="text-4xl">{section.title}</p>
                     <Link
                       href={section.links[0].href}
-                      className="text-sm font-bold"
+                      className="text-sm"
                       id={section.links[0].id}
                     >
                       {section.links[0].text}
@@ -128,7 +137,7 @@ export default function Footer() {
                     <Link
                       key={link.id}
                       href={link.href}
-                      className="text-sm my-2 font-bold"
+                      className="text-sm my-2"
                       id={link.id}
                     >
                       {link.text}
@@ -136,6 +145,9 @@ export default function Footer() {
                   ))}
                 </div>
               ))}
+            </div>
+            <div className="text-right text-base font-bold">
+              © NETFIT Inc. All rights reserved.
             </div>
           </div>
         </div>

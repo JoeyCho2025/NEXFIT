@@ -1,20 +1,23 @@
-import localFont from "next/font/local";
+import { Lato } from "next/font/google";
+import { Noto_Sans_JP } from "next/font/google";
 import Navbar from "./components/Navbar";
 import Sidebar from "./components/Sidebar";
-import Footer from "./components/Footer"
+import Footer from "./components/Footer";
 import Link from "next/link";
-import "@/styles/globals.css"
+import "@/styles/globals.css";
 
-
-const lato = localFont({
-  src: "../public/fonts/LatoRegular.ttf",
+const lato = Lato({
+  subsets: ["latin"],
+  weight: ["400", "700", "900"],
   variable: "--font-lato",
-  weight: "100 900",
+  display: "swap",
 });
-const notoSans = localFont({
-  src: "../public/fonts/NotoSansJP.ttf",
+
+const notoSans = Noto_Sans_JP({
+  subsets: ["latin"],
+  weight: ["400", "500", "700"],
   variable: "--font-notoSans",
-  weight: "100 900",
+  display: "swap",
 });
 
 export const metadata = {
@@ -29,7 +32,7 @@ export default function RootLayout({ children }) {
         <Navbar />
         <main className="flex">
           <Sidebar />
-          { children }
+          {children}
         </main>
         <Footer />
       </body>
