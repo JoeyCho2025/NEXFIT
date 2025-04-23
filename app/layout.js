@@ -1,6 +1,7 @@
 import localFont from "next/font/local";
 import Navbar from "./components/Navbar";
 import Sidebar from "./components/Sidebar";
+import Footer from "./components/Footer"
 import Link from "next/link";
 import "@/styles/globals.css"
 
@@ -30,6 +31,7 @@ export default function RootLayout({ children }) {
           <Sidebar />
           { children }
         </main>
+        <Footer />
       </body>
     </html>
   );

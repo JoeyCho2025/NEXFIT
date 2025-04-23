@@ -7,7 +7,7 @@ https://ui.shadcn.com/docs/components/
 ## 待討論
 
 1.內容外框線的大小是否要固定？
-
+2.active的顏色要改嗎？目前是跟邊框同色(#e1e1e1)
 ---
 
 
