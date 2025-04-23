@@ -1,22 +1,22 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import css from "@/styles/navbar.css";
+import "@/styles/navbar.css";
 
 // 一定要大寫開頭，才會被視為自訂元件
 const HoverLink = ({ en, zh }) => {
   const [language, setLanguage] = useState("en");
 
   return (
-    <span
+    <div
       className="linkText"
       onMouseEnter={() => setLanguage("zh")}
       onMouseLeave={() => setLanguage("en")}
     >
       {language === "en" ? en : zh}
-    </span>
+    </div>
   );
 };
 

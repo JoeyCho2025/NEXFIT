@@ -1,8 +1,9 @@
 import localFont from "next/font/local";
-import "./globals.css";
 import Navbar from "./components/Navbar";
 import Sidebar from "./components/Sidebar";
 import Link from "next/link";
+import "@/styles/globals.css"
+
 
 const lato = localFont({
   src: "../public/fonts/LatoRegular.ttf",
@@ -27,7 +28,7 @@ export default function RootLayout({ children }) {
         <Navbar />
         <main className="flex">
           <Sidebar />
-          {children}
+          { children }
         </main>
       </body>
     </html>
