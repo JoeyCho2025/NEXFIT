@@ -1,9 +1,9 @@
 "use client";
 
-import React, {useState} from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import css from "@/styles/navbar.css"; // 引入 CSS
+import css from "@/styles/navbar.css";
 
 // 一定要大寫開頭，才會被視為自訂元件
 const HoverLink = ({ en, zh }) => {
@@ -42,7 +42,7 @@ export default function Navbar() {
         ))}
       </div>
       <div className="imageGroup">
-        <Link href="/account">
+        <Link href="/accountCenter">
           <Image src="/account.svg" alt="Account Icon" width={30} height={30} />
         </Link>
         <Link href="/cart">
