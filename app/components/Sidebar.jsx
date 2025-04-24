@@ -4,7 +4,6 @@ import Link from "next/link";
 import React, { useState } from "react";
 import { usePathname } from "next/navigation";
 import { accountCenter, mall } from "/app/config/sidebarSection";
-import "@/styles/sidebar.css";
 
 export default function Sidebar() {
   const [activeId, setActiveId] = useState("1");
