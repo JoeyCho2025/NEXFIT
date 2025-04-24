@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import React from "react";
 import Image from "next/image";
@@ -15,13 +15,13 @@ export default function Footer() {
               <p className="text-5xl font-bold">NEXFIT</p>
               <div className="flex mb-10 ">
                 {socialLinks.map((sL) => (
-                  <Link href={sL.href} key={sL.id} className="ml-10 pr-1">
+                  <Link href={sL.href} key={sL.id} className="ml-7">
                     <Image
                       src={sL.icon}
                       alt="Account Icon"
                       width={30}
                       height={30}
-                      className={sL.isLast ? "mr-5" : ""}
+                      className={sL.isLast ? "mr-7" : ""}
                     />
                   </Link>
                 ))}
@@ -29,7 +29,7 @@ export default function Footer() {
             </div>
             <div className="flex justify-between">
               {sections.map((section) => (
-                <div key={section.id} className="flex flex-col pr-4">
+                <div key={section.id} className="flex flex-col pr-10">
                   <div className="mb-6">
                     <p className="text-4xl font-semibold">{section.title}</p>
                     <p

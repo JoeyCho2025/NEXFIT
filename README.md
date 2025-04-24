@@ -1,8 +1,5 @@
-## 一個UI的元件庫，可以參考看看(bootstrap pro max)
-https://ui.shadcn.com/docs/components/
-
-## mfee-react-01-網站路由規劃表
-https://docs.google.com/spreadsheets/d/1kLDSY2DZhGR8Svib8zixHmmzTef4QeOeMSXjI0voLto/edit?gid=0#gid=0
+## 一個UI的元件庫[shadcn](https://ui.shadcn.com/docs/components/)
+## [mfee-react-01-網站路由規劃表](https://docs.google.com/spreadsheets/d/1kLDSY2DZhGR8Svib8zixHmmzTef4QeOeMSXjI0voLto/edit?gid=0#gid=0)
 ----
 
 ## 待討論

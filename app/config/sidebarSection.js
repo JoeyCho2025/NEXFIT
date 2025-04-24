@@ -1,14 +1,13 @@
 export const accountCenter = [
   {
     id: "1",
-    href: "/accountCenter/account",
+    href: "/accountCenter/member/account",
     name: "帳戶基本資料",
     isActive: true,
   },
-  { id: "2", href: "/accountCenter/body", name: "身體基本資料" },
-  { id: "3", href: "/accountCenter/password", name: "第三方綁定與密碼" },
-  { id: "4", href: "/accountCenter/course", name: "課程進度" },
-  { id: "5", href: "/accountCenter/achievement", name: " 成就" },
+  { id: "3", href: "/accountCenter/member/password", name: "第三方綁定與密碼" },
+  { id: "4", href: "/accountCenter/member/course", name: "課程進度" },
+  { id: "5", href: "/accountCenter/member/achievement", name: " 成就" },
   {
     id: "6",
     href: "/accountCenter/address",
