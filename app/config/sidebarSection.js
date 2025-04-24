@@ -10,7 +10,7 @@ export const accountCenter = [
   { id: "5", href: "/accountCenter/member/achievement", name: " 成就" },
   {
     id: "6",
-    href: "/accountCenter/address",
+    href: "/accountCenter/member/address",
     name: " 預設收件地址",
     isLast: true,
   },

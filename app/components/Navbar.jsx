@@ -39,7 +39,7 @@ export default function Navbar() {
         ))}
       </div>
       <div className="flex gap-8 pr-25">
-        <Link href="/accountCenter/account">
+        <Link href="/accountCenter/member/account">
           <Image src="/account.svg" alt="Account Icon" width={30} height={30} />
         </Link>
         <Link href="/cart">

@@ -1,10 +1,6 @@
 import { Lato } from "next/font/google";
 import { Noto_Sans_JP } from "next/font/google";
-import Navbar from "./components/Navbar";
-import Sidebar from "./components/Sidebar";
-import Footer from "./components/Footer";
-import Link from "next/link";
-import "@/styles/globals.css";
+import "./_styles/globals.css";
 
 const lato = Lato({
   subsets: ["latin"],
@@ -29,12 +25,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`${lato.variable} ${notoSans.variable}`}>
-        <Navbar />
-        <main className="flex">
-          <Sidebar />
-          {children}
-        </main>
-        <Footer />
+        {children}
       </body>
     </html>
   );
