@@ -1,48 +1,44 @@
 "use client";
 
-import React, { useState, useRef, useEffect } from "react";
+import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import "@/styles/navbar.css";
+import { links } from "/app/config/navbarSection";
 
-
-// 一定要大寫開頭，才會被視為自訂元件
 const HoverLink = ({ en, zh }) => {
-  const [language, setLanguage] = useState("en");
-
   return (
-    <div
-      className="linkText"
-      onMouseEnter={() => setLanguage("zh")}
-      onMouseLeave={() => setLanguage("en")}
-    >
-      {language === "en" ? en : zh}
+    <div className="relative inline-block opacity-70 group-hover:opacity-100 min-w-[100px] text-center h-8">
+      <div className="relative h-full w-full">
+        <span className="absolute inset-0 flex items-center justify-center transition-all duration-300 ease-in-out transform group-hover:-translate-y-5 group-hover:opacity-0">
+          {en}
+        </span>
+        <span className="absolute inset-0 flex items-center justify-center transition-all duration-300 ease-in-out transform translate-y-5 opacity-0 group-hover:translate-y-0 group-hover:opacity-100">
+          {zh}
+        </span>
+      </div>
     </div>
   );
 };
 
 export default function Navbar() {
-  const links = [
-    { id: "1", href: "/news", en: "NEWS", zh: "最新消息" },
-    { id: "2", href: "/about", en: "ABOUT", zh: "關於我們" },
-    { id: "3", href: "/fuel", en: "FUEL", zh: "補給" },
-    { id: "4", href: "/faq", en: "FAQ", zh: "常見問答" },
-    { id: "5", href: "/class", en: "CLASS", zh: "課程" },
-    { id: "6", href: "/contact", en: "CONTACT", zh: "聯絡我們" },
-    { id: "7", href: "/forum", en: "FORUM", zh: "論壇" },
-  ];
-
   return (
-    <nav className="nav">
-      <p>NEXFIT</p>
-      <div className="linkGroup">
-        {links.map((link, index) => (
-          <Link key={link.id} href={link.href} className="Link">
+    <nav className="flex items-center justify-between p-1 border-b-2 border-white shadow-md mb-[1px]">
+      <Link href="/" className="logo">
+        <p className="text-3xl font-bold pl-16 py-2.5">NEXFIT</p>
+      </Link>
+      <div className="flex justify-center gap-1">
+        {links.map((link) => (
+          <Link
+            key={link.id}
+            href={link.href}
+            className="relative ml-5 text-gray-700 group"
+          >
             <HoverLink en={link.en} zh={link.zh} />
+            <span className="absolute bottom-0 left-1/2 w-0 h-0.5 bg-[#a9ba5c] transition-all duration-300 transform -translate-x-1/2 group-hover:w-[calc(100%-45px)]" />
           </Link>
         ))}
       </div>
-      <div className="imageGroup">
+      <div className="flex gap-8 pr-25">
         <Link href="/accountCenter">
           <Image src="/account.svg" alt="Account Icon" width={30} height={30} />
         </Link>

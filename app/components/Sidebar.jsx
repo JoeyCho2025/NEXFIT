@@ -3,32 +3,8 @@
 import Link from "next/link";
 import React, { useState } from "react";
 import { usePathname } from "next/navigation";
+import { accountCenter, mall } from "/app/config/sidebarSection";
 import "@/styles/sidebar.css";
-
-const accountCenter = [
-  {
-    id: "1",
-    href: "/accountCenter/account",
-    name: "帳戶基本資料",
-    isActive: true,
-  },
-  { id: "2", href: "/accountCenter/body", name: "身體基本資料" },
-  { id: "3", href: "/accountCenter/password", name: "第三方綁定與密碼" },
-  { id: "4", href: "/accountCenter/course", name: "課程進度" },
-  { id: "5", href: "/accountCenter/achievement", name: " 成就" },
-  {
-    id: "6",
-    href: "/accountCenter/address",
-    name: " 預設收件地址",
-    isLast: true,
-  },
-];
-
-const mall = [
-  { id: "7", href: "/mall/order", name: "訂單" },
-  { id: "8", href: "/mall/coupon", name: "優惠券" },
-  { id: "9", href: "/mall/favorite", name: "收藏清單", isLast: true },
-];
 
 export default function Sidebar() {
   const [activeId, setActiveId] = useState("1");
@@ -46,7 +22,7 @@ export default function Sidebar() {
           <li className="text-base  text-white w-full bg-black text-center p-3 rounded-t-xl">
             會員中心
           </li>
-          {accountCenter.map((a, index) => (
+          {accountCenter.map((a) => (
             <Link key={a.id} href={a.href}>
               <li
                 className={`text-sm border-b border-x py-3.5 px-5 border-borderColor text-fontColor opacity-80
