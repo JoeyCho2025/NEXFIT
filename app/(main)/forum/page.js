@@ -8,7 +8,7 @@ export default function ForumPage() {
   const [currentPage, setCurrentPage] = useState(1);
   const postsPerPage = 3;
 
-  // 🟢 從 API 抓資料
+  // 從 API 抓資料
   useEffect(() => {
     fetch("/api/forum")
       .then((res) => res.json())
