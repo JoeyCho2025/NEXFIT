@@ -1,99 +1,25 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function ForumPage() {
+  const [posts, setPosts] = useState([]);
   const [activeCategory, setActiveCategory] = useState("全部");
   const [currentPage, setCurrentPage] = useState(1);
   const postsPerPage = 3;
 
-  const allPosts = [
-    {
-      id: 1,
-      author: { name: "Jenny", avatar: "/avatars/user1.jpg" },
-      content: "今天的核心訓練真的很充實！",
-      images: ["/posts/workout1.jpg"],
-      tags: ["重訓", "健身"],
-      likes: 24,
-      comments: 5,
-      shares: 2,
-    },
-    {
-      id: 2,
-      author: { name: "John", avatar: "/avatars/user2.jpg" },
-      content: "慢跑讓我心情好多了。",
-      images: [],
-      tags: ["有氧"],
-      likes: 10,
-      comments: 2,
-      shares: 1,
-    },
-    {
-      id: 3,
-      author: { name: "Amy", avatar: "/avatars/user3.jpg" },
-      content: "我嘗試了新飲食計畫，好吃又健康！",
-      images: [],
-      tags: ["飲食"],
-      likes: 15,
-      comments: 3,
-      shares: 0,
-    },
-    {
-      id: 4,
-      author: { name: "Tom", avatar: "/avatars/user4.jpg" },
-      content: "深蹲重量終於突破 100 公斤了！",
-      images: [],
-      tags: ["重訓"],
-      likes: 30,
-      comments: 4,
-      shares: 5,
-    },
-    {
-      id: 5,
-      author: { name: "Sandy", avatar: "/avatars/user5.jpg" },
-      content: "第一次嘗試瑜珈，很有挑戰性呢！",
-      images: [],
-      tags: ["心得"],
-      likes: 18,
-      comments: 1,
-      shares: 0,
-    },
-    {
-      id: 6,
-      author: { name: "Leo", avatar: "/avatars/user6.jpg" },
-      content: "參加馬拉松後的心得分享！",
-      images: [],
-      tags: ["有氧", "心得"],
-      likes: 22,
-      comments: 5,
-      shares: 2,
-    },
-    {
-      id: 7,
-      author: { name: "Mia", avatar: "/avatars/user7.jpg" },
-      content: "健康便當這樣配超營養！",
-      images: [],
-      tags: ["飲食"],
-      likes: 17,
-      comments: 0,
-      shares: 0,
-    },
-    {
-      id: 8,
-      author: { name: "David", avatar: "/avatars/user8.jpg" },
-      content: "今天練腿練到炸裂 🦵🔥",
-      images: [],
-      tags: ["重訓"],
-      likes: 40,
-      comments: 7,
-      shares: 4,
-    },
-  ];
+  // 🟢 從 API 抓資料
+  useEffect(() => {
+    fetch("/api/forum")
+      .then((res) => res.json())
+      .then((data) => setPosts(data))
+      .catch((err) => console.error("資料讀取失敗：", err));
+  }, []);
 
   const filteredPosts =
     activeCategory === "全部"
-      ? allPosts
-      : allPosts.filter((post) => post.tags.includes(activeCategory));
+      ? posts
+      : posts.filter((post) => post.tags?.includes(activeCategory));
 
   const totalPages = Math.ceil(filteredPosts.length / postsPerPage);
   const indexOfLastPost = currentPage * postsPerPage;
@@ -169,20 +95,18 @@ export default function ForumPage() {
             <div className="flex items-center mb-4">
               <div className="w-10 h-10 bg-gray-200 rounded-full mr-3" />
               <div>
-                <p className="font-bold">{post.author.name}</p>
-                <p className="text-xs text-gray-500">2 小時前</p>
+                <p className="font-bold">{post.author_name || "匿名用戶"}</p>
+                <p className="text-xs text-gray-500">{post.created_at}</p>
               </div>
             </div>
             <p className="mb-4">{post.content}</p>
             <div className="mb-4">
-              {post.images.map((image, index) => (
-                <div key={index} className="w-full aspect-video bg-gray-200 rounded" />
-              ))}
+              {/* 若未來加入圖片欄位再補這邊 */}
             </div>
             <div className="flex gap-4 text-sm">
-              <button>❤️ {post.likes}</button>
-              <button>💬 {post.comments}</button>
-              <button>🔄 {post.shares}</button>
+              <button>❤️ {post.likes ?? 0}</button>
+              <button>💬 {post.comments ?? 0}</button>
+              <button>🔄 {post.shares ?? 0}</button>
             </div>
           </div>
         ))}
