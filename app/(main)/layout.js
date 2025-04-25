@@ -7,7 +7,7 @@ export default function MainLayout({ children }) {
     <>
       <Navbar />
       <main className="flex">
-        <Sidebar />
+        {/* <Sidebar /> */}
         {children}
       </main>
       <Footer />
