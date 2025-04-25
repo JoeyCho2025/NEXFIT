@@ -7,7 +7,7 @@ import { socialLinks, sections } from "/app/config/footerSection";
 
 export default function Footer() {
   return (
-    <footer className="w-full bg-[url(/bg2.png)] flex flex-col justify-end mt-80 h-full">
+    <footer className="w-full bg-[#444444] flex flex-col justify-end mt-80 h-full">
       <div className="pt-20 pl-20 h-full">
         <div className="ml-10 bg-white rounded-tl-[60px] p-5 h-full">
           <div className="flex-row px-20">

@@ -1,9 +1,10 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { links } from "/app/config/navbarSection";
+import LoginModal from "./login";
 
 const HoverLink = ({ en, zh }) => {
   return (
@@ -21,6 +22,16 @@ const HoverLink = ({ en, zh }) => {
 };
 
 export default function Navbar() {
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+
+  const openLoginModal = () => {
+    setIsLoginModalOpen(true);
+  };
+
+  const closeLoginModal = () => {
+    setIsLoginModalOpen(false);
+  };
+
   return (
     <nav className="flex items-center justify-between p-1 border-b-2 border-white shadow-md mb-[1px]">
       <Link href="/" className="logo">
@@ -40,8 +51,18 @@ export default function Navbar() {
       </div>
       <div className="flex gap-8 pr-25">
         <Link href="/accountCenter/member/account">
-          <Image src="/account.svg" alt="Account Icon" width={30} height={30} />
+          <Image
+            src="/account.svg"
+            alt="Account Icon"
+            width={30}
+            height={30}
+            onClick={openLoginModal}
+          />
         </Link>
+        {isLoginModalOpen && (
+          <LoginModal isOpen={isLoginModalOpen} onClose={closeLoginModal} />
+        )}
+
         <Link href="/cart">
           <Image src="/cart.svg" alt="Cart Icon" width={30} height={30} />
         </Link>
