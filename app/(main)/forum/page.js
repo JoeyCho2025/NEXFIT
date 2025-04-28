@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function ForumPage() {
   const [posts, setPosts] = useState([]);
@@ -8,7 +8,18 @@ export default function ForumPage() {
   const [currentPage, setCurrentPage] = useState(1);
   const postsPerPage = 3;
 
-  // 從 API 抓資料
+  const hotPosts = [
+    { id: 1, title: "熱門文章1", image: "/images/hot1.jpg" },
+    { id: 2, title: "熱門文章2", image: "/images/hot2.jpg" },
+    { id: 3, title: "熱門文章3", image: "/images/hot3.jpg" },
+  ];
+
+  const announcements = [
+    { id: 1, title: "系統維護通知" },
+    { id: 2, title: "新功能上線啦！" },
+    { id: 3, title: "會員活動開跑" },
+  ];
+
   useEffect(() => {
     fetch("/api/forum")
       .then((res) => res.json())
@@ -16,134 +27,132 @@ export default function ForumPage() {
       .catch((err) => console.error("資料讀取失敗：", err));
   }, []);
 
-  const filteredPosts =
-    activeCategory === "全部"
-      ? posts
-      : posts.filter((post) => post.tags?.includes(activeCategory));
-
-  const totalPages = Math.ceil(filteredPosts.length / postsPerPage);
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  const currentPosts = filteredPosts.slice(indexOfFirstPost, indexOfLastPost);
+  const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
 
-  const renderPagination = () => (
-    <div className="flex justify-center gap-2 mt-6">
-      {Array.from({ length: totalPages }, (_, i) => (
-        <button
-          key={i}
-          onClick={() => setCurrentPage(i + 1)}
-          className={`px-3 py-1 rounded border text-sm ${
-            currentPage === i + 1 ? "bg-black text-white" : "bg-white text-black"
-          }`}
-        >
-          {i + 1}
-        </button>
-      ))}
-    </div>
-  );
+  const categories = ["全部", "運動", "健康", "營養"];
+  const filteredPosts =
+    activeCategory === "全部"
+      ? currentPosts
+      : currentPosts.filter((post) => post.category === activeCategory);
 
   return (
-    <div className="grid grid-cols-[250px_1fr_250px] gap-6">
-      {/* 左側邊欄 */}
-      <aside className="bg-white p-4 rounded shadow h-fit sticky top-20 self-start">
-        <div className="mb-6">
-          <div className="w-20 h-20 bg-gray-200 rounded-full mx-auto mb-4" />
-          <div className="flex justify-center gap-2">
-            <button className="px-3 py-1 bg-black text-white rounded">追蹤</button>
-            <button className="px-3 py-1 bg-black text-white rounded">訊息</button>
-          </div>
-        </div>
-        <nav className="space-y-2 text-sm">
-          <button className="w-full text-left hover:bg-gray-100 p-2 rounded">個人檔案</button>
-          <button className="w-full text-left hover:bg-gray-100 p-2 rounded">我的貼文</button>
-          <button className="w-full text-left hover:bg-gray-100 p-2 rounded">收藏貼文</button>
-          <button className="w-full text-left hover:bg-gray-100 p-2 rounded">設定</button>
-        </nav>
-        <div className="mt-6">
-          <h3 className="font-bold mb-2 text-sm">成就徽章</h3>
-          <div className="grid grid-cols-3 gap-2">
-            {[...Array(9)].map((_, i) => (
-              <div key={i} className="w-8 h-8 bg-gray-200 rounded-full" />
-            ))}
-          </div>
-        </div>
-      </aside>
+    <div className="flex max-w-7xl mx-auto px-4 py-8 gap-8">
+      {/* 左側 Sidebar */}
+      <SidebarLeft />
 
-      {/* 中間主區域 */}
-      <main className="space-y-6">
-        <div className="flex gap-2 mb-4">
-          {["全部", "重訓", "有氧", "飲食", "心得"].map((category) => (
+      {/* 中間內容區 */}
+      <main className="flex-1">
+        <HotCarousel hotPosts={hotPosts} />
+
+        {/* 分類 tabs */}
+        <div className="flex flex-wrap gap-2 my-6">
+          {categories.map((cat) => (
             <button
-              key={category}
-              onClick={() => {
-                setActiveCategory(category);
-                setCurrentPage(1);
-              }}
-              className={`px-4 py-1.5 rounded-full text-sm ${
-                activeCategory === category
+              key={cat}
+              onClick={() => setActiveCategory(cat)}
+              className={`px-5 py-2 rounded-full text-sm font-semibold ${
+                activeCategory === cat
                   ? "bg-black text-white"
-                  : "bg-white text-black border"
+                  : "bg-gray-200 text-black hover:bg-gray-300"
               }`}
             >
-              {category}
+              {cat}
             </button>
           ))}
         </div>
 
-        {currentPosts.map((post) => (
-          <div key={post.id} className="bg-white p-4 rounded shadow">
-            <div className="flex items-center mb-4">
-              <div className="w-10 h-10 bg-gray-200 rounded-full mr-3" />
-              <div>
-                <p className="font-bold">{post.author_name || "匿名用戶"}</p>
-                <p className="text-xs text-gray-500">{post.created_at}</p>
-              </div>
-            </div>
-            <p className="mb-4">{post.content}</p>
-            <div className="mb-4">
-              {/* 若未來加入圖片欄位再補這邊 */}
-            </div>
-            <div className="flex gap-4 text-sm">
-              <button>❤️ {post.likes ?? 0}</button>
-              <button>💬 {post.comments ?? 0}</button>
-              <button>🔄 {post.shares ?? 0}</button>
-            </div>
-          </div>
-        ))}
+        {/* 文章列表 */}
+        <PostList posts={filteredPosts} />
 
-        {renderPagination()}
+        {/* 分頁器 */}
+        <div className="flex gap-2 mt-6">
+          {Array.from({ length: Math.ceil(posts.length / postsPerPage) }, (_, idx) => (
+            <button
+              key={idx + 1}
+              onClick={() => setCurrentPage(idx + 1)}
+              className={`w-10 h-10 rounded-full text-sm ${
+                currentPage === idx + 1
+                  ? "bg-black text-white"
+                  : "bg-gray-300 text-black hover:bg-gray-400"
+              }`}
+            >
+              {idx + 1}
+            </button>
+          ))}
+        </div>
       </main>
 
-      {/* 右側邊欄 */}
-      <aside className="bg-white p-4 rounded shadow h-fit sticky top-20 self-start">
-        <div className="mb-6">
-          <h3 className="font-bold mb-2 text-sm">推薦用戶</h3>
-          <div className="space-y-3">
-            {[1, 2, 3].map((i) => (
-              <div key={i} className="flex items-center justify-between text-sm">
-                <div className="flex items-center">
-                  <div className="w-8 h-8 bg-gray-200 rounded-full mr-2" />
-                  <div>
-                    <p className="font-semibold">User {i}</p>
-                    <p className="text-xs text-gray-500">健身教練</p>
-                  </div>
-                </div>
-                <button className="text-blue-500">追蹤</button>
-              </div>
-            ))}
-          </div>
-        </div>
-        <div>
-          <h3 className="font-bold mb-2 text-sm">熱門標籤</h3>
-          <div className="flex flex-wrap gap-2">
-            {["#健身", "#重訓", "#飲食", "#瑜珈"].map((tag) => (
-              <span key={tag} className="px-2 py-1 bg-gray-100 rounded text-xs">
-                {tag}
-              </span>
-            ))}
-          </div>
-        </div>
-      </aside>
+      {/* 右側 Sidebar */}
+      <SidebarRight announcements={announcements} />
     </div>
+  );
+}
+
+// 熱門輪播子組件
+function HotCarousel({ hotPosts }) {
+  return (
+    <div className="flex overflow-x-auto gap-4">
+      {hotPosts.map((post) => (
+        <div key={post.id} className="flex-shrink-0 w-52 bg-white rounded-lg shadow-md p-4">
+          <img src={post.image} alt={post.title} className="w-full h-32 object-cover rounded-md" />
+          <h4 className="mt-2 font-semibold">{post.title}</h4>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+// 文章列表子組件
+function PostList({ posts }) {
+  return (
+    <div className="flex flex-col gap-6">
+      {posts.map((post) => (
+        <div key={post.id} className="bg-white p-6 rounded-lg shadow">
+          <h3 className="text-xl font-bold mb-2">{post.title}</h3>
+          <p className="text-gray-600">{post.content?.slice(0, 100)}...</p>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+// 左側 Sidebar
+function SidebarLeft() {
+  return (
+    <aside className="w-64 bg-gray-100 p-6 rounded-lg hidden md:block">
+      <div className="text-center">
+        <img
+          src="/images/avatars/default-avatar.jpg"
+          alt="User"
+          className="w-24 h-24 mx-auto rounded-full"
+        />
+        <h4 className="mt-4 font-semibold">用戶名稱</h4>
+        <p className="text-gray-500">積分: 1200</p>
+      </div>
+
+      <div className="mt-8 flex flex-col gap-4">
+        <button className="bg-black text-white py-2 rounded-lg">發表文章</button>
+        <button className="bg-black text-white py-2 rounded-lg">查看成就</button>
+        <button className="bg-black text-white py-2 rounded-lg">收藏文章</button>
+      </div>
+    </aside>
+  );
+}
+
+// 右側 Sidebar
+function SidebarRight({ announcements }) {
+  return (
+    <aside className="w-64 bg-gray-100 p-6 rounded-lg hidden lg:block">
+      <h4 className="font-bold mb-4">最新公告</h4>
+      <ul className="list-disc list-inside space-y-2">
+        {announcements.map((item) => (
+          <li key={item.id} className="text-gray-700">
+            {item.title}
+          </li>
+        ))}
+      </ul>
+    </aside>
   );
 }
