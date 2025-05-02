@@ -1,8 +1,8 @@
 "use client";
 import { useState, useEffect } from "react";
-import SidebarLeft from "./SidebarLeft";
-import SidebarRight from "./SidebarRight";
-import ForumMain from "./ForumMain";
+import SidebarLeft from "./components/SidebarLeft";
+import SidebarRight from "./components/SidebarRight";
+import ForumMain from "./components/ForumMain";
 
 export default function ForumPage() {
   const [posts, setPosts] = useState([]);
@@ -65,7 +65,7 @@ export default function ForumPage() {
   }, []);
 
   return (
-    <div className="flex max-w-7xl mx-auto px-4 py-8 gap-8">
+    <div className="flex max-w-7xl mx-auto px-4 py-8 gap-8 h-full">
       <SidebarLeft />
       <ForumMain
         posts={posts}

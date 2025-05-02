@@ -2,7 +2,7 @@
 
 import LoginModal from "./components/login";
 import Image from "next/image";
-import { useState } from "react"; // 確保從 React 導入 useState
+import { useState } from "react"; 
 
 export default function Home() {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);

@@ -47,7 +47,7 @@ export default function ForumMain({
       <PostList posts={filteredPosts} />
 
       {/* 分頁器 */}
-      <div className="flex gap-2 mt-6">
+      <div className="flex gap-2 mt-6 justify-center">
         {Array.from(
           { length: Math.ceil(posts.length / postsPerPage) },
           (_, idx) => (
