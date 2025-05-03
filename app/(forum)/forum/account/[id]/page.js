@@ -1,6 +1,17 @@
 "use client";
 import Image from "next/image";
+import Link from "next/link";
 import { useState } from "react";
+import {
+  FaRegEdit,
+  FaHeart,
+  FaBoxOpen,
+  FaTrophy,
+  FaThumbsUp,
+  FaPen,
+  FaTrashAlt,
+  FaMedal,
+} from "react-icons/fa";
 
 export default function ForumAccountPage() {
   const [activeTab, setActiveTab] = useState("我的文章");
@@ -21,20 +32,20 @@ export default function ForumAccountPage() {
   ];
 
   const menuItems = [
-    { label: "我的文章", icon: "📝" },
-    { label: "收藏文章", icon: "💖" },
-    { label: "草稿箱", icon: "📦" },
-    { label: "發文成就", icon: "🏆" },
+    { label: "我的文章", icon: <FaRegEdit className="text-2xl" /> },
+    { label: "收藏文章", icon: <FaHeart className="text-2xl text-pink-500" /> },
+    { label: "草稿箱", icon: <FaBoxOpen className="text-2xl text-yellow-600" /> },
+    { label: "發文成就", icon: <FaTrophy className="text-2xl text-yellow-500" /> },
   ];
 
   const handleEdit = (id) => {
-    alert(`🖊️ 編輯文章 ID: ${id}`);
+    alert(`編輯文章 ID: ${id}`);
   };
 
   const handleDelete = (id) => {
     const confirmDelete = window.confirm("確定要刪除這篇文章嗎？");
     if (confirmDelete) {
-      alert(`🗑️ 已刪除文章 ID: ${id}`);
+      alert(`已刪除文章 ID: ${id}`);
     }
   };
 
@@ -54,17 +65,17 @@ export default function ForumAccountPage() {
 
         <div className="grid grid-cols-3 gap-4 text-center text-sm text-white/90 mt-4">
           <div className="flex flex-col items-center">
-            <span className="text-xl">📝</span>
+            <FaRegEdit className="text-xl mb-1" />
             <span>發文數</span>
             <span className="font-semibold">120</span>
           </div>
           <div className="flex flex-col items-center">
-            <span className="text-xl">💖</span>
+            <FaHeart className="text-xl mb-1 text-pink-400" />
             <span>收藏數</span>
             <span className="font-semibold">35</span>
           </div>
           <div className="flex flex-col items-center">
-            <span className="text-xl">👍</span>
+            <FaThumbsUp className="text-xl mb-1 text-blue-300" />
             <span>被讚數</span>
             <span className="font-semibold">88</span>
           </div>
@@ -83,7 +94,7 @@ export default function ForumAccountPage() {
                 : "bg-white text-gray-700 hover:bg-gray-100"
             }`}
           >
-            <span className="text-2xl">{item.icon}</span>
+            {item.icon}
             {item.label}
           </button>
         ))}
@@ -112,17 +123,16 @@ export default function ForumAccountPage() {
                   </div>
                 </div>
                 <div className="flex flex-col gap-2 text-sm">
-                  <button
-                    onClick={() => handleEdit(post.id)}
-                    className="px-3 py-1 text-blue-600 border border-blue-600 rounded hover:bg-blue-50"
-                  >
-                    🖊️ 編輯
+                <Link href={`/forum/edit/${post.id}`}>
+                  <button className="px-3 py-1 text-blue-600 border border-blue-600 rounded hover:bg-blue-50 flex items-center gap-1">
+                    <FaPen /> 編輯
                   </button>
+                </Link>
                   <button
                     onClick={() => handleDelete(post.id)}
-                    className="px-3 py-1 text-red-600 border border-red-600 rounded hover:bg-red-50"
+                    className="px-3 py-1 text-red-600 border border-red-600 rounded hover:bg-red-50 flex items-center gap-1"
                   >
-                    🗑️ 刪除
+                    <FaTrashAlt /> 刪除
                   </button>
                 </div>
               </div>
@@ -137,10 +147,9 @@ export default function ForumAccountPage() {
           <div className="text-gray-500 text-sm italic">（尚未有草稿內容）</div>
         )}
         {activeTab === "發文成就" && (
-          <div className="bg-white p-4 rounded-xl shadow text-center">
-            <p className="text-gray-700">
-              🎉 你已獲得 <strong>健筆如飛</strong>、<strong>日更小達人</strong> 等 3 枚徽章！
-            </p>
+          <div className="bg-white p-4 rounded-xl shadow text-center flex items-center justify-center gap-2 text-gray-700">
+            <FaMedal className="text-yellow-500 text-lg" />
+            你已獲得 <strong>健筆如飛</strong>、<strong>日更小達人</strong> 等 3 枚徽章！
           </div>
         )}
       </div>
