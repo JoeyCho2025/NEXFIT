@@ -1,8 +1,8 @@
 "use client";
 import { useState, useEffect } from "react";
-import SidebarLeft from "./components/SidebarLeft";
-import SidebarRight from "./components/SidebarRight";
-import ForumMain from "./components/ForumMain";
+import SidebarLeft from "./_components/SidebarLeft";
+import SidebarRight from "./_components/SidebarRight";
+import ForumMain from "./_components/ForumMain";
 
 export default function ForumPage() {
   const [posts, setPosts] = useState([]);
