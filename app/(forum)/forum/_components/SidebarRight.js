@@ -1,3 +1,14 @@
+"use client";
+import {
+  FaRegNewspaper,
+  FaCalendarAlt,
+  FaTrophy,
+  FaRunning,
+  FaChartLine,
+  FaDumbbell,
+  FaFire,
+} from "react-icons/fa";
+
 export default function SidebarRight({
   announcements,
   stats,
@@ -9,7 +20,7 @@ export default function SidebarRight({
       {/* 最新公告 */}
       <div className="bg-white shadow-md rounded-xl p-5">
         <h4 className="font-bold text-base mb-4 border-b pb-2 flex items-center gap-2">
-          📰 最新公告
+          <FaRegNewspaper className="text-lg" /> 最新公告
         </h4>
         <ul className="space-y-2 text-sm">
           {announcements.map((item) => (
@@ -23,23 +34,25 @@ export default function SidebarRight({
         </ul>
       </div>
 
-      {/* 🧍‍♂️ 個人運動統計 */}
+      {/* 個人運動統計 */}
       <div className="grid grid-cols-2 gap-3">
         {stats.map((s, i) => (
           <div
             key={i}
             className="bg-black text-white rounded-xl p-3 text-center shadow hover:shadow-lg transition"
           >
-            <div className="text-xl">{s.icon}</div>
+            <div className="text-xl flex justify-center">{s.icon}</div>
             <div className="text-xs mt-1">{s.label}</div>
             <div className="text-sm font-semibold">{s.value}</div>
           </div>
         ))}
       </div>
 
-      {/* 📅 即將到來活動 */}
+      {/* 即將到來活動 */}
       <div className="bg-white shadow-md rounded-xl p-5">
-        <h4 className="font-bold text-base mb-4 border-b pb-2">📅 即將到來活動</h4>
+        <h4 className="font-bold text-base mb-4 border-b pb-2 flex items-center gap-2">
+          <FaCalendarAlt className="text-lg" /> 即將到來活動
+        </h4>
         <div className="space-y-4">
           {upcomingEvents.map((event, idx) => (
             <div key={idx} className="flex gap-3 items-start">
@@ -66,9 +79,11 @@ export default function SidebarRight({
         </div>
       </div>
 
-      {/* 🏆 成就徽章 */}
+      {/* 成就徽章 */}
       <div className="bg-white shadow-md rounded-xl p-5">
-        <h4 className="font-bold text-base mb-4 border-b pb-2">🏆 成就專區</h4>
+        <h4 className="font-bold text-base mb-4 border-b pb-2 flex items-center gap-2">
+          <FaTrophy className="text-lg" /> 成就專區
+        </h4>
         <div className="grid grid-cols-2 gap-3">
           {achievements.map((a, i) => (
             <div

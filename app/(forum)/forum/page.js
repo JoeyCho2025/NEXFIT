@@ -1,8 +1,11 @@
 "use client";
 import { useState, useEffect } from "react";
-import SidebarLeft from "./_components/SidebarLeft";
-import SidebarRight from "./_components/SidebarRight";
-import ForumMain from "./_components/ForumMain";
+import SidebarLeft from "@/app/(forum)/forum/_components/SidebarLeft";
+import SidebarRight from "@/app/(forum)/forum/_components/SidebarRight";
+import ForumMain from "@/app/(forum)/forum/_components/ForumMain";
+
+// 引入 React Icons 用於 stats
+import { FaRunning, FaChartLine, FaDumbbell, FaFire } from "react-icons/fa";
 
 export default function ForumPage() {
   const [posts, setPosts] = useState([]);
@@ -22,11 +25,12 @@ export default function ForumPage() {
     { id: 3, title: "會員活動開跑" },
   ];
 
+  // ✅ 改用 React Icons 作為 stats icon
   const stats = [
-    { icon: "🏃", label: "運動時長", value: "4 小時" },
-    { icon: "📈", label: "進步程度", value: "+15%" },
-    { icon: "🏋️", label: "訓練次數", value: "12 次" },
-    { icon: "🔥", label: "消耗熱量", value: "1200 卡路里" },
+    { icon: <FaRunning />, label: "運動時長", value: "4 小時" },
+    { icon: <FaChartLine />, label: "進步程度", value: "+15%" },
+    { icon: <FaDumbbell />, label: "訓練次數", value: "12 次" },
+    { icon: <FaFire />, label: "消耗熱量", value: "1200 卡路里" },
   ];
 
   const upcomingEvents = [
@@ -65,23 +69,46 @@ export default function ForumPage() {
   }, []);
 
   return (
-    <div className="flex max-w-7xl mx-auto px-4 py-8 gap-8 h-full">
-      <SidebarLeft />
-      <ForumMain
-        posts={posts}
-        hotPosts={hotPosts}
-        currentPage={currentPage}
-        setCurrentPage={setCurrentPage}
-        activeCategory={activeCategory}
-        setActiveCategory={setActiveCategory}
-        postsPerPage={3}
-      />
-      <SidebarRight
-        announcements={announcements}
-        stats={stats}
-        upcomingEvents={upcomingEvents}
-        achievements={achievements}
-      />
+    <div className="flex flex-col min-h-screen">
+      {/* 主要內容區塊 */}
+      <div className="flex max-w-7xl mx-auto px-4 py-8 gap-8 flex-1 w-full">
+        <SidebarLeft />
+        <ForumMain
+          posts={posts}
+          hotPosts={hotPosts}
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+          activeCategory={activeCategory}
+          setActiveCategory={setActiveCategory}
+          postsPerPage={postsPerPage}
+        />
+        <SidebarRight
+          announcements={announcements}
+          stats={stats}
+          upcomingEvents={upcomingEvents}
+          achievements={achievements}
+        />
+      </div>
+
+      {/* 分頁器 */}
+      <div className="w-full flex justify-center py-4 bg-white">
+        {Array.from(
+          { length: Math.ceil(posts.length / postsPerPage) },
+          (_, idx) => (
+            <button
+              key={idx + 1}
+              onClick={() => setCurrentPage(idx + 1)}
+              className={`mx-1 w-10 h-10 rounded-full text-sm ${
+                currentPage === idx + 1
+                  ? "bg-black text-white"
+                  : "bg-gray-300 text-black hover:bg-gray-400"
+              }`}
+            >
+              {idx + 1}
+            </button>
+          )
+        )}
+      </div>
     </div>
   );
 }

@@ -1,3 +1,58 @@
+"use client";
+import {
+  FaUserGraduate,
+  FaTools,
+  FaFemale,
+  FaBalanceScale,
+  FaDumbbell,
+  FaAppleAlt,
+  FaStethoscope,
+  FaWheelchair,
+} from "react-icons/fa";
+
+const topics = [
+  {
+    icon: <FaUserGraduate className="text-2xl" />,
+    title: "新手入門",
+    desc: "適合新註冊用戶的教學與入門",
+  },
+  {
+    icon: <FaTools className="text-2xl" />,
+    title: "系統協助解說",
+    desc: "如何使用論壇功能",
+  },
+  {
+    icon: <FaFemale className="text-2xl" />,
+    title: "女性專區",
+    desc: "健康、運動、飲食等主題",
+  },
+  {
+    icon: <FaBalanceScale className="text-2xl" />,
+    title: "減重專區",
+    desc: "減脂、控制體重與健康體態",
+  },
+  {
+    icon: <FaDumbbell className="text-2xl" />,
+    title: "健身專區",
+    desc: "重訓、體能與運動技巧分享",
+  },
+  {
+    icon: <FaAppleAlt className="text-2xl" />,
+    title: "營養專區",
+    desc: "飲食建議與營養補充討論",
+  },
+  {
+    icon: <FaStethoscope className="text-2xl" />,
+    title: "醫學專區",
+    desc: "健康檢查、慢性病與醫療問題",
+  },
+  {
+    icon: <FaWheelchair className="text-2xl" />,
+    title: "特殊族群",
+    desc: "長輩與照護者交流區",
+  },
+];
+
 export default function SidebarLeft() {
   return (
     <aside className="w-72 space-y-6 hidden md:block">
@@ -27,54 +82,13 @@ export default function SidebarLeft() {
       <div className="bg-white shadow-md rounded-xl p-5 hover:shadow-lg">
         <h4 className="font-bold text-base mb-4 border-b pb-2">精選社群主題</h4>
         <div className="flex flex-col gap-3">
-          {[
-            {
-              icon: "🧑‍🎓",
-              title: "新手入門",
-              desc: "適合新註冊用戶的教學與入門",
-            },
-            {
-              icon: "🛠️",
-              title: "系統協助解說",
-              desc: "如何使用論壇功能",
-            },
-            {
-              icon: "👩",
-              title: "女性專區",
-              desc: "健康、運動、飲食等主題",
-            },
-            {
-              icon: "⚖️",
-              title: "減重專區",
-              desc: "減脂、控制體重與健康體態",
-            },
-            {
-              icon: "🏋️‍♂️",
-              title: "健身專區",
-              desc: "重訓、體能與運動技巧分享",
-            },
-            {
-              icon: "🥗",
-              title: "營養專區",
-              desc: "飲食建議與營養補充討論",
-            },
-            {
-              icon: "🩺",
-              title: "醫學專區",
-              desc: "健康檢查、慢性病與醫療問題",
-            },
-            {
-              icon: "♿",
-              title: "特殊族群",
-              desc: "長輩與照護者交流區",
-            },
-          ].map((item) => (
+          {topics.map((item) => (
             <button
               key={item.title}
               className="text-left bg-gray-100 hover:bg-gray-200 p-4 rounded-lg shadow-sm transition-all"
             >
               <div className="flex items-start gap-3">
-                <div className="text-2xl">{item.icon}</div>
+                {item.icon}
                 <div>
                   <h5 className="font-semibold text-sm">{item.title}</h5>
                   <p className="text-xs text-gray-600">{item.desc}</p>

@@ -1,6 +1,6 @@
 "use client";
-import HotCarousel from "./HotCarousel";
-import PostList from "./PostList";
+import HotCarousel from "@/app/(forum)/forum/_components/HotCarousel";
+import PostList from "@/app/(forum)/forum/_components/PostList";
 
 export default function ForumMain({
   posts,
@@ -46,7 +46,7 @@ export default function ForumMain({
       {/* 文章列表 */}
       <PostList posts={filteredPosts} />
 
-      {/* 分頁器 */}
+      {/* 分頁器
       <div className="flex gap-2 mt-6 justify-center">
         {Array.from(
           { length: Math.ceil(posts.length / postsPerPage) },
@@ -64,7 +64,7 @@ export default function ForumMain({
             </button>
           )
         )}
-      </div>
+      </div> */}
     </main>
   );
 }
