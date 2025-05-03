@@ -27,6 +27,17 @@ export default function ForumAccountPage() {
     { label: "發文成就", icon: "🏆" },
   ];
 
+  const handleEdit = (id) => {
+    alert(`🖊️ 編輯文章 ID: ${id}`);
+  };
+
+  const handleDelete = (id) => {
+    const confirmDelete = window.confirm("確定要刪除這篇文章嗎？");
+    if (confirmDelete) {
+      alert(`🗑️ 已刪除文章 ID: ${id}`);
+    }
+  };
+
   return (
     <div className="w-full mx-auto px-10 py-6 space-y-10">
       {/* 頭像資訊卡片 */}
@@ -42,23 +53,23 @@ export default function ForumAccountPage() {
         <p className="text-sm text-gray-300">運動個案管理師 / 健康推廣者</p>
 
         <div className="grid grid-cols-3 gap-4 text-center text-sm text-white/90 mt-4">
-        <div className="flex flex-col items-center">
-          <span className="text-xl">📝</span>
-          <span>發文數</span>
-          <span className="font-semibold">120</span>
-        </div>
-        <div className="flex flex-col items-center">
-          <span className="text-xl">💖</span>
-          <span>收藏數</span>
-          <span className="font-semibold">35</span>
-        </div>
-        <div className="flex flex-col items-center">
-          <span className="text-xl">👍</span>
-          <span>被讚數</span>
-          <span className="font-semibold">88</span>
+          <div className="flex flex-col items-center">
+            <span className="text-xl">📝</span>
+            <span>發文數</span>
+            <span className="font-semibold">120</span>
+          </div>
+          <div className="flex flex-col items-center">
+            <span className="text-xl">💖</span>
+            <span>收藏數</span>
+            <span className="font-semibold">35</span>
+          </div>
+          <div className="flex flex-col items-center">
+            <span className="text-xl">👍</span>
+            <span>被讚數</span>
+            <span className="font-semibold">88</span>
+          </div>
         </div>
       </div>
-    </div>
 
       {/* 四個橫向按鈕選單 */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
@@ -87,16 +98,32 @@ export default function ForumAccountPage() {
             {posts.map((post) => (
               <div
                 key={post.id}
-                className="bg-white rounded-xl shadow p-4 flex gap-4 items-center"
+                className="bg-white rounded-xl shadow p-4 flex gap-4 items-center justify-between"
               >
-                <img
-                  src={post.image}
-                  alt={post.title}
-                  className="w-32 h-24 object-cover rounded-lg"
-                />
-                <div>
-                  <h4 className="font-semibold">{post.title}</h4>
-                  <p className="text-sm text-gray-600">{post.excerpt}</p>
+                <div className="flex gap-4 items-center">
+                  <img
+                    src={post.image}
+                    alt={post.title}
+                    className="w-32 h-24 object-cover rounded-lg"
+                  />
+                  <div>
+                    <h4 className="font-semibold">{post.title}</h4>
+                    <p className="text-sm text-gray-600">{post.excerpt}</p>
+                  </div>
+                </div>
+                <div className="flex flex-col gap-2 text-sm">
+                  <button
+                    onClick={() => handleEdit(post.id)}
+                    className="px-3 py-1 text-blue-600 border border-blue-600 rounded hover:bg-blue-50"
+                  >
+                    🖊️ 編輯
+                  </button>
+                  <button
+                    onClick={() => handleDelete(post.id)}
+                    className="px-3 py-1 text-red-600 border border-red-600 rounded hover:bg-red-50"
+                  >
+                    🗑️ 刪除
+                  </button>
                 </div>
               </div>
             ))}
@@ -106,11 +133,9 @@ export default function ForumAccountPage() {
         {activeTab === "收藏文章" && (
           <div className="text-gray-500 text-sm italic">（尚未加入收藏文章）</div>
         )}
-
         {activeTab === "草稿箱" && (
           <div className="text-gray-500 text-sm italic">（尚未有草稿內容）</div>
         )}
-
         {activeTab === "發文成就" && (
           <div className="bg-white p-4 rounded-xl shadow text-center">
             <p className="text-gray-700">
@@ -120,7 +145,7 @@ export default function ForumAccountPage() {
         )}
       </div>
 
-      {/* 分頁器（圓形按鈕 + 置中） */}
+      {/* 分頁器 */}
       <div className="flex justify-center gap-3 mt-8">
         {[1, 2, 3].map((page) => (
           <button
@@ -136,6 +161,5 @@ export default function ForumAccountPage() {
         ))}
       </div>
     </div>
-    
   );
 }
