@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Image from "next/image";
 import { useParams, useRouter } from "next/navigation";
 import {
   FaPen,
@@ -61,6 +60,33 @@ export default function EditPostPage() {
     window.addEventListener("beforeunload", handleBeforeUnload);
     return () => window.removeEventListener("beforeunload", handleBeforeUnload);
   }, [isDirty]);
+
+  // 圖片上傳
+  const handleImageUpload = async (e) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const formData = new FormData();
+      formData.append("file", file);
+
+      setSaveStatus(<><FaSpinner className="animate-spin" /> 圖片上傳中...</>);
+      try {
+        const res = await fetch("/api/forum/upload", {
+          method: "POST",
+          body: formData,
+        });
+        const data = await res.json();
+        if (res.ok && data.url) {
+          setImage(data.url);
+          setIsDirty(true);
+          setSaveStatus(<><FaCheck className="text-green-500" /> 圖片已上傳</>);
+        } else {
+          setSaveStatus(<><FaTimes className="text-red-500" /> 圖片上傳失敗</>);
+        }
+      } catch {
+        setSaveStatus(<><FaTimes className="text-red-500" /> 圖片上傳失敗</>);
+      }
+    }
+  };
 
   const handleSave = async () => {
     if (!post.title || !post.category) {
@@ -155,13 +181,7 @@ export default function EditPostPage() {
               id="imageUpload"
               type="file"
               accept="image/*"
-              onChange={(e) => {
-                const file = e.target.files?.[0];
-                if (file) {
-                  setImage(URL.createObjectURL(file));
-                  setIsDirty(true);
-                }
-              }}
+              onChange={handleImageUpload}
               className="hidden"
             />
           </div>
