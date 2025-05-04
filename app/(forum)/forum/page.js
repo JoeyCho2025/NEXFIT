@@ -17,13 +17,13 @@ export default function ForumPage() {
     { id: 1, title: "熱門文章1", image: "/images/hot1.jpg" },
     { id: 2, title: "熱門文章2", image: "/images/hot2.jpg" },
     { id: 3, title: "熱門文章3", image: "/images/hot3.jpg" },
-    { id: 3, title: "熱門文章3", image: "/images/hot3.jpg" },
-    { id: 2, title: "熱門文章2", image: "/images/hot2.jpg" },
-    { id: 3, title: "熱門文章3", image: "/images/hot3.jpg" },
-    { id: 3, title: "熱門文章3", image: "/images/hot3.jpg" },
-    { id: 2, title: "熱門文章2", image: "/images/hot2.jpg" },
-    { id: 3, title: "熱門文章3", image: "/images/hot3.jpg" },
-    { id: 3, title: "熱門文章3", image: "/images/hot3.jpg" },
+    { id: 4, title: "熱門文章3", image: "/images/hot3.jpg" },
+    { id: 5, title: "熱門文章2", image: "/images/hot2.jpg" },
+    { id: 6, title: "熱門文章3", image: "/images/hot3.jpg" },
+    { id: 7, title: "熱門文章3", image: "/images/hot3.jpg" },
+    { id: 8, title: "熱門文章2", image: "/images/hot2.jpg" },
+    { id: 9, title: "熱門文章3", image: "/images/hot3.jpg" },
+    { id: 10, title: "熱門文章3", image: "/images/hot3.jpg" },
   ];
 
   const announcements = [
