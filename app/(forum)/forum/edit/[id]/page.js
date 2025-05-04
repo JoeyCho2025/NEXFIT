@@ -24,7 +24,7 @@ export default function EditPostPage() {
   const [toast, setToast] = useState("");
 
   useEffect(() => {
-    fetch(`/api/post/${id}`)
+    fetch(`/api/forum/edit/${id}`)
       .then((res) => {
         if (!res.ok) {
           throw new Error("找不到貼文");
@@ -69,7 +69,7 @@ export default function EditPostPage() {
     }
 
     const updatedPost = { ...post, image };
-    const res = await fetch(`/api/post/${id}`, {
+    const res = await fetch(`/api/forum/edit/${id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(updatedPost),
@@ -125,23 +125,46 @@ export default function EditPostPage() {
               alt="預覽圖片"
               className="w-full h-64 object-cover rounded-md mb-3"
             />
+          ) : Array.isArray(post.images) ? (
+            <img
+              src={post.images[0]}
+              alt="預覽圖片"
+              className="w-full h-64 object-cover rounded-md mb-3"
+            />
+          ) : typeof post.images === "string" ? (
+            <img
+              src={post.images}
+              alt="預覽圖片"
+              className="w-full h-64 object-cover rounded-md mb-3"
+            />
           ) : (
             <div className="w-full h-64 bg-gray-100 rounded-md flex items-center justify-center text-gray-400">
               尚未上傳圖片
             </div>
           )}
-          <input
-            type="file"
-            accept="image/*"
-            onChange={(e) => {
-              const file = e.target.files?.[0];
-              if (file) {
-                setImage(URL.createObjectURL(file));
-                setIsDirty(true);
-              }
-            }}
-            className="text-sm"
-          />
+
+          <div className="relative inline-block mt-2">
+            <button
+              type="button"
+              className="px-4 py-2 bg-gray-200 hover:bg-gray-300 rounded-md text-sm font-medium cursor-pointer"
+              onClick={() => document.getElementById("imageUpload").click()}
+            >
+              選擇圖片
+            </button>
+            <input
+              id="imageUpload"
+              type="file"
+              accept="image/*"
+              onChange={(e) => {
+                const file = e.target.files?.[0];
+                if (file) {
+                  setImage(URL.createObjectURL(file));
+                  setIsDirty(true);
+                }
+              }}
+              className="hidden"
+            />
+          </div>
         </div>
 
         <div className="bg-white rounded-xl shadow p-6">
