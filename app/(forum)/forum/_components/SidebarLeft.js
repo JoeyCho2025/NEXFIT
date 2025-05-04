@@ -59,7 +59,7 @@ export default function SidebarLeft() {
       {/* 用戶卡片 */}
       <div className="bg-white rounded-xl p-5 text-center shadow-md hover:shadow-lg transition-shadow duration-200">
         <img
-          src="/images/avatars/default-avatar.jpg"
+          src="/uploads/forum/avatars/default.jpg"
           alt="User"
           className="w-20 h-20 mx-auto rounded-full"
         />
